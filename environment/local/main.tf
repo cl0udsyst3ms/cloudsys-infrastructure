@@ -6,9 +6,13 @@ provider "aws" {
 	region = "${var.aws_region}"
 }
 
-module "vpc" {
+module "network" {
   source = "../../modules/network"
 
-  vpc_cidr = "${var.vpc_cidr}"
-  
+  vpc_cidr       = "${var.vpc_cidr}"
+}
+module "compute" {
+  source = "../../modules/compute"
+
+  main_subnet_id = "${module.network.main_subnet_id}" 
 }

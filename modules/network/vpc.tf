@@ -16,3 +16,5 @@ resource "aws_subnet" "main" {
         Name = "Main"
     }
 }
+
+output "main_subnet_id" { value = "${aws_subnet.main.id}" }
