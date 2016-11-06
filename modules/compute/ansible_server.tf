@@ -6,9 +6,18 @@ resource "aws_instance" "ansible_server" {
     subnet_id     = "${var.main_subnet_id}"
     vpc_security_group_ids = ["${aws_security_group.allow_admin_sg.id}"]
     associate_public_ip_address = "true"
-    user_data     = "${file("${path.module}/bin/user_data.sh")}"
+    user_data     = "${data.template_file.ansible_user_data.rendered}"
 
     tags {
-        Name = "Developer's machine"
+        Name = "ansible.home.co.uk"
     }
 }
+
+data "template_file" "ansible_user_data" {
+    template = "${file("${path.module}/bin/user_data_ansible.sh")}"
+
+    vars {
+	node_ip = "${aws_instance.test_node.private_ip}"
+    }
+}
+
