@@ -2,6 +2,7 @@ variable "main_subnet_id" { }
 
 resource "aws_instance" "coreOS" {
     ami           = "ami-6666f915"
+    count         = 0
     instance_type = "t2.micro"
     key_name      = "DevSSH"
     subnet_id     = "${var.main_subnet_id}"
