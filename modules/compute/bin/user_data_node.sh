@@ -4,10 +4,13 @@ logger "Setup test node"
 
 logger "Developer user setup"
 useradd -m -d /home/developer -s /bin/bash -c "Dev user" -U developer
-chown developer:developer /home/developer/.ssh
 mkdir -p /home/developer/.ssh
-cat /home/developer/.ssh/authorized_keys <<EOF
-ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCtK+a2DDRcVpRE6ATh2V93ZTNolubGyi+XaObMb6F5gDI0H5IavI9xH3WEGMLr0yIr9PRccDsWRubPV7nb7q6H9agyj55Wmbco9+ERmkKMXG65huAaf+9nvK1yomIvQKqo/bGX30hOrB7xGNLLnNIO9296w7j+hBMX1JCM8Dpoa7T2GI/e8ZhSCLE5OyDnfRcLSkM3NBx2SP+wPsiTL8/4pJDU0b0JP9dJWbUlvV6B1ipvsldfyu+URawbltP5ii3hRobxEoD10jQP1JSlkDorJYE17Lw/TYG0z5Qq5leXGMI+3/xyL6KxWyUnjMsJBWU+ViAaWg9/PFy+3Y4MmS65 developer@miszcz
+chown developer:developer /home/developer/.ssh
+touch /home/developer/.ssh/authorized_keys
+cat > /home/developer/.ssh/authorized_keys <<EOF
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCrjWABc9Mdq/rfC7NtIRk61OInHy6GFtp0Q7UiIhezWLnXfZrRaXDN/4p5CjkhAIYOL2wJN8sxLPSuGDls1LU7QurJ/mW+Z9yze7t9z86U9VfxARQ6Qn92YQoe1LNxfcwr5oxhhlZRB8sMRonNRtKUELY5h6+t18+JjbpNioydmp+6FS4IvQu7QcNh/XjJF+lIfK+s/kYEUR1RJibVIJhoYRuC17VT/0CiV6sEUOGUsBBztFPDIGPriJKd7uGRthWpNUgVoast4sYXVRlyE/8bXvPSWFNHHrqgFyRA1hu6sv73hjwYW5oEGpVv41/xJaNWS4TnEChWl7vJnnYMbvYB developer@ip-7-7-7-42
 EOF
+
+chown developer:developer /home/developer/.ssh/authorized_keys
 
 echo "developer ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers

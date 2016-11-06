@@ -7,7 +7,19 @@ apt update
 apt-get install -y ansible
 
 cp /etc/ansible/hosts /etc/ansible/hosts.orig
-
+cp /etc/ansible/ansible.cfg /etc/ansible/ansible.cfg.orig
+# ansible all -s -m apt -a 'pkg=nginx state=installed update_cache=true'
+# ansible all -m ping -s
+cat > /etc/ansible/ansible.cfg <<EOF
+[defaults]
+remote_user = developer
+[privilege_escalation]
+[paramiko_connection]
+[ssh_connection]
+[accelerate]
+[selinux]
+[colors]
+EOF
 cat > /etc/ansible/hosts <<EOF
 [web]
 ${node_ip}
@@ -17,34 +29,36 @@ logger "Developer user setup"
 useradd -m -d /home/developer -s /bin/bash -c "Dev user" -U developer
 mkdir -p /home/developer/.ssh
 chown developer:developer /home/developer/.ssh
+touch /home/developer/.ssh/id_rsa
 cat /home/developer/.ssh/id_rsa <<EOF
 -----BEGIN RSA PRIVATE KEY-----
-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
+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
 -----END RSA PRIVATE KEY-----
 EOF
 
 chmod 400 /home/developer/.ssh/id_rsa
+chown developer:developer /home/developer/.ssh/id_rsa
