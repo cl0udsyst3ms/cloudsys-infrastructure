@@ -18,3 +18,7 @@ resource "aws_instance" "core_server" {
 data "template_file" "core_user_data" {
     template = "${file("${path.module}/bin/user_data_core.sh")}"
 }
+
+
+output "vpn_instance_id" { value = "${aws_instance.core_server.id}" }
+output "vpn_NIC_id"      { value = "${aws_instance.core_server.network_interface_id}" }
