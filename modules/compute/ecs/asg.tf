@@ -33,14 +33,14 @@ data "template_file" "docker_user_data" {
 }
 
 resource "aws_s3_bucket_object" "common_settings_script_object_alb" {
-    bucket  = "js-terraform-user-data-scripts"
+    bucket  = "home-inf-user-data-scripts"
     key     = "${var.environment}/ecs/common_settings_user_data.sh"
     content = "${data.template_file.docker_user_data.rendered}"
     acl     = "bucket-owner-full-control"
 }
 
 resource "aws_autoscaling_group" "ecs" {
-  name                 = "docker_asg_${var.environment} - ${aws_launch_configuration.docker_lc.name}"
+  name                 = "docker_asg_${var.environment}"
 #  availability_zones   = ["${split(",", var.AZs)}"]
   launch_configuration = "${aws_launch_configuration.docker_lc.name}"
   vpc_zone_identifier  = ["${var.app_subnet_id}"]
