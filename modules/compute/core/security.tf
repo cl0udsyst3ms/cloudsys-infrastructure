@@ -10,6 +10,13 @@ resource "aws_security_group" "vpn_sg" {
       cidr_blocks = ["2.123.18.177/32"]
   }
 
+  ingress {
+      from_port = 1194
+      to_port   = 1194
+      protocol  = "tcp"
+      cidr_blocks = ["2.123.18.177/32"]
+  }
+#--------------------------------------
   egress {
       from_port = 0
       to_port = 0

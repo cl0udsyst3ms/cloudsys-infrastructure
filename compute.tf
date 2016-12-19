@@ -11,3 +11,10 @@ module "nodes" {
   app_subnet_id  = "${module.network.app_subnet_id}"
   vpc_id         = "${module.network.vpc_id}"
 }
+
+module "ecs" {
+  source = "modules/compute/ecs"
+
+  app_subnet_id  = "${module.network.app_subnet_id}"
+  vpc_id         = "${module.network.vpc_id}"
+}
