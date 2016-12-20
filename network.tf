@@ -6,6 +6,7 @@ module "network" {
   source = "modules/network"
 
   vpc_cidr        = "${var.vpc_cidr}"
+  AZs             = "${var.AZs}"
   vpn_instance_id = "${module.core.vpn_instance_id}" 
   vpn_NIC_id      = "${module.core.vpn_NIC_id}" 
 }

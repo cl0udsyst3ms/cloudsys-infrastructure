@@ -3,7 +3,6 @@
 variable "environment"          { default = "live" }
 variable "AZs"                  { default = "eu-west-1"}
 variable "app_subnet_id"        { }
-variable "app2_subnet_id"       { }
 variable "vpc_id"               { }
 variable "main_ssh_key_pair"    { default = "DevSSH"}
 variable "ec2_instance_ami"     { default = "ami-8d7439fe" }
