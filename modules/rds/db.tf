@@ -24,6 +24,10 @@ resource "aws_db_subnet_group" "default" {
     }
 }
 
+data "vault_generic_secret" "postgres-pass" {
+  path = "secret/postgres"
+}
+
 resource "aws_db_instance" "db" {
   vpc_security_group_ids = ["${aws_security_group.db_sg.id}"]
   allocated_storage      = "${var.rds_storage_size}"
@@ -35,8 +39,8 @@ resource "aws_db_instance" "db" {
   storage_type           = "gp2"
   name                   = "dockerDB"
   identifier             = "db-${random_id.random.dec}"
-  username               = "${var.rds_user}"
-  password               = "${var.rds_password}"
+  username               = "${data.vault_generic_secret.postgres-pass.data["kong_user"]}"
+  password               = "${data.vault_generic_secret.postgres-pass.data["kong_password"]}"
   db_subnet_group_name   = "${aws_db_subnet_group.default.id}"
   parameter_group_name   = "default.postgres9.5"
   auto_minor_version_upgrade = "false"
@@ -49,3 +53,5 @@ resource "aws_db_instance" "db" {
     Creator     = "terraform"
   }
 }
+
+output vault_data { value = "${data.vault_generic_secret.postgres-pass.data}" } 
