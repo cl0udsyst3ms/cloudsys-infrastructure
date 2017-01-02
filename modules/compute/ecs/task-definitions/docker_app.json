@@ -12,18 +12,14 @@
       "essential": true,
       "mountPoints": [
         {
-          "containerPath": "/opt/nodeapp/config",
-          "sourceVolume": "/etc/liga/config",
+          "containerPath": "/opt/nodeapp/config/",
+          "sourceVolume": "liga_app_config",
           "readOnly": null
-        },
-        {
-          "containerPath": "/opt/nodeapp/logs",
-          "sourceVolume": "/etc/liga/logs"
         }
       ],
       "name": "docker_app",
       "image": "${docker_container_image}",
-      "entryPoint" : [ "/bin/loop.sh" ],
+      "entryPoint" : [ "bin/loop.sh" ],
       "command" : [ "start" ],
       "cpu": ${cpu}
     }

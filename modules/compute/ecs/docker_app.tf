@@ -26,8 +26,8 @@ resource "aws_ecs_task_definition" "docker_app_task" {
   container_definitions = "${data.template_file.docker_app_task_template.rendered}"
 
   volume {
-      name = "docker_app_config"
-      host_path = "/etc/app"
+      name = "liga_app_config"
+      host_path = "/etc/liga/config"
   }
 }
 
