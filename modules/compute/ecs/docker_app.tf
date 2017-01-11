@@ -17,7 +17,7 @@ resource "aws_ecs_service" "docker_app" {
   load_balancer {
     target_group_arn = "${aws_alb_target_group.docker_app_tg.arn}"
     container_name = "docker_app"
-    container_port = 3000
+    container_port = 9999
   }
 }
 
@@ -26,8 +26,8 @@ resource "aws_ecs_task_definition" "docker_app_task" {
   container_definitions = "${data.template_file.docker_app_task_template.rendered}"
 
   volume {
-      name = "docker_app_config"
-      host_path = "/etc/app"
+      name = "liga_app_config"
+      host_path = "/etc/liga/config"
   }
 }
 
@@ -35,7 +35,7 @@ data "template_file" "docker_app_task_template" {
   template = "${file("${path.module}/task-definitions/docker_app.json")}"
 
   vars {
-    docker_container_image = "337549412157.dkr.ecr.eu-west-1.amazonaws.com/docker_app:${var.docker_app_image_version}"
+    docker_container_image = "sirk79/mojaligaapi:latest"
     cpu                    = "${var.docker_app_cpu}"
     memory                 = "${var.docker_app_memory}"
     environment            = "${var.environment}"

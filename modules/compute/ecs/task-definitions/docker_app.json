@@ -5,21 +5,21 @@
       "portMappings": [
         { 
           "hostPort": 0,
-          "containerPort": 3000,
+          "containerPort": 9999,
           "protocol": "tcp"
         }
       ],
       "essential": true,
       "mountPoints": [
         {
-          "containerPath": "/opt/nodeapp/config",
-          "sourceVolume": "docker_app_config",
+          "containerPath": "/opt/nodeapp/config/",
+          "sourceVolume": "liga_app_config",
           "readOnly": null
         }
       ],
       "name": "docker_app",
       "image": "${docker_container_image}",
-      "entryPoint" : [ "./run-aws-ecs.sh" ],
+      "entryPoint" : [ "bin/loop.sh" ],
       "command" : [ "start" ],
       "cpu": ${cpu}
     }
