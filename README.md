@@ -25,6 +25,8 @@ terraform get
 terraform plan -var-file=config/local/terraform.tfvars -input=false
 # optionally plan against one module
 terraform plan -target=module.network -var-file=config/local/terraform.tfvars -input=false
+# or resource
+terraform plan -target=aws_s3_bucket.terraform_remote_state_bucket -var-file=config/terraform.tfvars -input=false
 # if you're happy with plan - apply code
 terraform apply -var-file=config/local/terraform.tfvars -input=false
 ```

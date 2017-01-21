@@ -1,6 +1,3 @@
-variable "vpn_instance_id"    { }
-variable "vpn_NIC_id"         { }
-
 resource "aws_internet_gateway" "igw" {
     vpc_id = "${aws_vpc.development_vpc.id}"
 

@@ -1,6 +1,6 @@
 variable "vpc_cidr" { }
-variable "app_cidr" { default = "10.0.0.32/27,10.0.0.64/27" }
-variable "db_cidr"  { default = "10.0.0.96/27,1.0.0.128/27" }
+variable "app_cidr" { default = "1.0.0.32/27,1.0.0.64/27" }
+variable "db_cidr"  { default = "1.0.0.96/27,1.0.0.128/27" }
 variable "AZs"      { }
 
 resource "aws_vpc" "development_vpc" {

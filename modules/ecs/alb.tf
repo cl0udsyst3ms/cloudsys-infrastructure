@@ -3,7 +3,7 @@ resource "aws_alb" "docker_alb" {
   name               = "docker-alb-${var.environment}"
   internal           = true
   security_groups    = ["${aws_security_group.ecs_sg.id}"]
-  subnets            = ["${split(",", var.app_subnet_id)}"]
+  subnets            = ["${split(",", var.dmz_subnet_id)}"]
 
   tags {
     Name        = "docker-alb"
