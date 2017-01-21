@@ -1,4 +1,4 @@
-# Cloud Design
+# AWS design
   * VPC
   * ECS with ALB
   * RDS (postgres)
@@ -16,17 +16,17 @@ terraform get
 
 ## Run terraform plan/apply
 ```
-terraform plan -var-file=environment/local/terraform.tfvars -input=false
+terraform plan -var-file=config/local/terraform.tfvars -input=false
 # optionally plan against one module
-terraform plan -target=module.network -var-file=environment/local/terraform.tfvars -input=false
+terraform plan -target=module.network -var-file=config/local/terraform.tfvars -input=false
 # if you're happy with plan - apply code
-terraform apply -var-file=environment/local/terraform.tfvars -input=false
+terraform apply -var-file=config/local/terraform.tfvars -input=false
 ```
 
 ## Destroy infrastructure
 ```
-terraform plan -destroy -target=module.rds -var-file=environment/local/terraform.tfvars
+terraform plan -destroy -target=module.rds -var-file=config/local/terraform.tfvars
 # if you're happy with plan of destruction - execute:
-terraform apply -destroy -target=module.rds -var-file=environment/local/terraform.tfvars
+terraform apply -destroy -target=module.rds -var-file=config/local/terraform.tfvars
 ```
 
