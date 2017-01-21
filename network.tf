@@ -1,7 +1,5 @@
 provider "aws" {
   region = "${var.aws_region}"
-#  shared_credentials_file = "~/.aws/credentials"
-#  profile = "cloudsys"
 }
 
 provider "vault" {
@@ -15,5 +13,6 @@ module "network" {
 
   vpc_cidr        = "${var.vpc_cidr}"
   AZs             = "${var.AZs}"
+  dmz_subnet_id  = "${module.network.dmz_subnet_id}"
 }
 

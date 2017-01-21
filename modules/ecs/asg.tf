@@ -43,7 +43,7 @@ resource "aws_autoscaling_group" "ecs" {
   name                 = "docker_asg_${var.environment}"
 #  availability_zones   = ["${split(",", var.AZs)}"]
   launch_configuration = "${aws_launch_configuration.docker_lc.name}"
-  vpc_zone_identifier  = ["${var.dmz_subnet_id}"]
+  vpc_zone_identifier  = ["${element(split(",", var.dmz_subnet_id), count.index)}"]
 
   min_size             = "${var.min_size}"
   max_size             = "${var.max_size}"
