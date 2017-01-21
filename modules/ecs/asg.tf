@@ -9,6 +9,7 @@ resource "aws_launch_configuration" "docker_lc" {
   iam_instance_profile = "${aws_iam_instance_profile.ecs_iam_profile.id}"
   security_groups      = ["${aws_security_group.ecs_sg.id}"]
   user_data            = "${data.template_file.ecs_s3_exec.rendered}"
+  associate_public_ip_address = true
 
   lifecycle {
     create_before_destroy = true
@@ -23,12 +24,17 @@ data "template_file" "ecs_s3_exec" {
   }
 }
 
+data "vault_generic_secret" "postgres-pass" {
+  path = "secret/postgres"
+}
+
 data "template_file" "docker_user_data" {
   template = "${file("${path.module}/bin/common_settings_user_data.sh")}"
 
   vars {
     docker_cluster_name = "${aws_ecs_cluster.docker_cluster.name}"
-    environment = "${var.environment}"
+    kong_password       = "${data.vault_generic_secret.postgres-pass.data["kong_password"]}"
+    environment         = "${var.environment}"
   }
 }
 
@@ -41,7 +47,6 @@ resource "aws_s3_bucket_object" "common_settings_script_object_alb" {
 
 resource "aws_autoscaling_group" "ecs" {
   name                 = "docker_asg_${var.environment}"
-#  availability_zones   = ["${split(",", var.AZs)}"]
   launch_configuration = "${aws_launch_configuration.docker_lc.name}"
   vpc_zone_identifier  = ["${var.dmz_subnet_id}"]
 
@@ -55,7 +60,7 @@ resource "aws_autoscaling_group" "ecs" {
 
  tag {
     key                     = "Name"
-    value                   = "ecs.${var.environment}.home.co.uk"
+    value                   = "ecs.${var.environment}.co.uk"
     propagate_at_launch     = true
   }
 

@@ -45,7 +45,7 @@ resource "aws_iam_role_policy_attachment" "attach_S3_read_only_to_ecs_role" {
  * Create Security Group (SG) for the ECS to use.
  */
 resource "aws_security_group" "ecs_sg" {
-    name        = "jobsite_ecs_sg"
+    name        = "ecs_sg"
     description = "SG"
     vpc_id      = "${var.vpc_id}"
 
