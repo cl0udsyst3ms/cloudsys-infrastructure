@@ -3,6 +3,7 @@
 variable "environment"          { default = "live" }
 variable "AZs"                  { default = "eu-west-1"}
 variable "dmz_subnet_id"        { }
+variable "app_subnet_id"        { }
 variable "vpc_id"               { }
 variable "vpn_gateway"          { default = "7.7.7.73/32" }
 variable "main_ssh_key_pair"    { default = "DevSSH"}

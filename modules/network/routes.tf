@@ -1,5 +1,3 @@
-variable "dmz_subnet_id"  { }
-
 resource "aws_internet_gateway" "igw" {
     vpc_id = "${aws_vpc.development_vpc.id}"
 
@@ -21,11 +19,10 @@ resource "aws_route_table" "dmz_rt" {
         Creator = "terraform"
     }
 }
-    #count             = "${length(split(",", var.dmz_cidr))}"
-
+/*
 resource "aws_route_table_association" "dm_rt_2_igw" {
-    subnet_id      = "${element(split(",", var.dmz_subnet_id), count.index)}"
+    subnet_id      = "${element(split(",", var.dmz1_subnet_id), count.index)}"
     route_table_id = "${aws_route_table.dmz_rt.id}"
     count          =  "${length(split(",", var.dmz_cidr))}"
 }
-
+*/

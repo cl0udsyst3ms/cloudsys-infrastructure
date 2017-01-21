@@ -13,6 +13,5 @@ module "network" {
 
   vpc_cidr        = "${var.vpc_cidr}"
   AZs             = "${var.AZs}"
-  dmz_subnet_id  = "${module.network.dmz_subnet_id}"
 }
 
