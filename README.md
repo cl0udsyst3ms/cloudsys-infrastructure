@@ -1,10 +1,32 @@
-## Init S3 remote state
+# Cloud Design
+  * VPC
+  * ECS with ALB
+  * RDS (postgres)
+
+## Re-point terraform.tfstate to S3
+Ignore this step if you want to use local state file
 ```
-terraform remote config -backend=s3 -backend-config="bucket=terraform-home-inf-state" -backend-config="key=home/terraform.tfstate" -backend-config="region=eu-west-1"*
+terraform remote config -backend=s3 -backend-config="bucket=terraform-ligatest-inf-state" -backend-config="key=live/terraform.tfstate" -backend-config="region=eu-west-1"
 ```
 
-## Run terraform plan
+## Check syntax and get terraform files
 ```
-terraform plan -var-file=environment/local/terraform.tfvars
+terraform get
+```
+
+## Run terraform plan/apply
+```
+terraform plan -var-file=environment/local/terraform.tfvars -input=false
+# optionally plan against one module
+terraform plan -target=module.network -var-file=environment/local/terraform.tfvars -input=false
+# if you're happy with plan - apply code
+terraform apply -var-file=environment/local/terraform.tfvars -input=false
+```
+
+## Destroy infrastructure
+```
 terraform plan -destroy -target=module.rds -var-file=environment/local/terraform.tfvars
+# if you're happy with plan of destruction - execute:
+terraform apply -destroy -target=module.rds -var-file=environment/local/terraform.tfvars
 ```
+

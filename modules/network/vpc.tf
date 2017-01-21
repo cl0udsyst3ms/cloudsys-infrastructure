@@ -1,6 +1,6 @@
 variable "vpc_cidr" { }
-variable "app_cidr" { default = "7.7.6.0/25,7.7.6.128/25" }
-variable "db_cidr"  { default = "7.7.7.128/26,7.7.7.192/26" }
+variable "app_cidr" { default = "10.0.0.32/27,10.0.0.64/27" }
+variable "db_cidr"  { default = "10.0.0.96/27,1.0.0.128/27" }
 variable "AZs"      { }
 
 resource "aws_vpc" "development_vpc" {
@@ -14,7 +14,7 @@ resource "aws_vpc" "development_vpc" {
 
 resource "aws_subnet" "dmz_subnet" {
     vpc_id     = "${aws_vpc.development_vpc.id}"
-    cidr_block = "7.7.7.0/25"
+    cidr_block = "1.0.0.0/27"
 
     tags {
         Name    = "dmz-subnet"
