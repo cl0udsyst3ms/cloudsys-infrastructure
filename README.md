@@ -22,19 +22,19 @@ terraform get
 
 ## Run terraform plan/apply
 ```
-terraform plan -var-file=config/local/terraform.tfvars -input=false
+terraform plan -var-file=config/terraform.tfvars -input=false
 # optionally plan against one module
-terraform plan -target=module.network -var-file=config/local/terraform.tfvars -input=false
+terraform plan -target=module.network -var-file=config/terraform.tfvars -input=false
 # or resource
 terraform plan -target=aws_s3_bucket.terraform_remote_state_bucket -var-file=config/terraform.tfvars -input=false
 # if you're happy with plan - apply code
-terraform apply -var-file=config/local/terraform.tfvars -input=false
+terraform apply -var-file=config/terraform.tfvars -input=false
 ```
 
 ## Destroy infrastructure
 ```
-terraform plan -destroy -target=module.rds -var-file=config/local/terraform.tfvars
+terraform plan -destroy -target=module.rds -var-file=config/terraform.tfvars
 # if you're happy with plan of destruction - execute:
-terraform apply -destroy -target=module.rds -var-file=config/local/terraform.tfvars
+terraform apply -destroy -target=module.rds -var-file=config/terraform.tfvars
 ```
 
