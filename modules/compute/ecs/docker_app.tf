@@ -27,7 +27,7 @@ resource "aws_ecs_task_definition" "docker_app_task" {
 
   volume {
       name = "liga_app_config"
-      host_path = "/etc/liga/config"
+      host_path = "/etc/moja-liga/api"
   }
 }
 
@@ -35,7 +35,7 @@ data "template_file" "docker_app_task_template" {
   template = "${file("${path.module}/task-definitions/docker_app.json")}"
 
   vars {
-    docker_container_image = "sirk79/mojaligaapi:latest"
+    docker_container_image = "sirk79/mojaligaapi:1.0"
     cpu                    = "${var.docker_app_cpu}"
     memory                 = "${var.docker_app_memory}"
     environment            = "${var.environment}"
