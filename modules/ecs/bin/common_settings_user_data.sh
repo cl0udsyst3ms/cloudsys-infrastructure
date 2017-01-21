@@ -14,7 +14,7 @@ echo "{
        "port": 5432,
        "host": "db-3288347112.cmwuvjr8mnqq.eu-west-1.rds.amazonaws.com",
        "user": "kong",
-       "pass": "<see_vault>",
+       "pass": "${kong_password}",
        "db": "moja_liga"
    },
    "db_options": {
