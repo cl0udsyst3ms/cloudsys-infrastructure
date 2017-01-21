@@ -3,6 +3,12 @@
   * ECS with ALB
   * RDS (postgres)
 
+## AWS credentials
+Set which profile settings you want to use by typing:
+```
+export AWS_PROFILE=<profile_name>
+```
+
 ## Re-point terraform.tfstate to S3
 Ignore this step if you want to use local state file
 ```

@@ -23,13 +23,6 @@ resource "aws_route_table" "dmz_rt" {
     }
 }
 
-resource "aws_route" "route_2_vpn" {
-    route_table_id            = "${aws_route_table.dmz_rt.id}"
-    destination_cidr_block    = "10.8.0.0/24"
-#    instance_id               = "${var.vpn_instance_id}"
-    network_interface_id      = "${var.vpn_NIC_id}" 
-}
-
 resource "aws_route_table_association" "dm_rt_2_igw" {
     subnet_id      = "${aws_subnet.dmz_subnet.id}"
     route_table_id = "${aws_route_table.dmz_rt.id}"
