@@ -33,7 +33,7 @@ data "template_file" "docker_user_data" {
 }
 
 resource "aws_s3_bucket_object" "common_settings_script_object_alb" {
-    bucket  = "home-inf-user-data-scripts"
+    bucket  = "ligatest-user-data-scripts"
     key     = "${var.environment}/ecs/common_settings_user_data.sh"
     content = "${data.template_file.docker_user_data.rendered}"
     acl     = "bucket-owner-full-control"
