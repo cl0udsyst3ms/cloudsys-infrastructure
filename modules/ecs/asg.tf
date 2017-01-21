@@ -33,7 +33,7 @@ data "template_file" "docker_user_data" {
 }
 
 resource "aws_s3_bucket_object" "common_settings_script_object_alb" {
-    bucket  = "home-inf-user-data-scripts"
+    bucket  = "ligatest-user-data-scripts"
     key     = "${var.environment}/ecs/common_settings_user_data.sh"
     content = "${data.template_file.docker_user_data.rendered}"
     acl     = "bucket-owner-full-control"
@@ -43,7 +43,7 @@ resource "aws_autoscaling_group" "ecs" {
   name                 = "docker_asg_${var.environment}"
 #  availability_zones   = ["${split(",", var.AZs)}"]
   launch_configuration = "${aws_launch_configuration.docker_lc.name}"
-  vpc_zone_identifier  = ["${var.app_subnet_id}"]
+  vpc_zone_identifier  = ["${element(split(",", var.dmz_subnet_id), count.index)}"]
 
   min_size             = "${var.min_size}"
   max_size             = "${var.max_size}"

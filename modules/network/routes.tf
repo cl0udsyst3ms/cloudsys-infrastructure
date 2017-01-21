@@ -1,5 +1,4 @@
-variable "vpn_instance_id"    { }
-variable "vpn_NIC_id"         { }
+variable "dmz_subnet_id"  { }
 
 resource "aws_internet_gateway" "igw" {
     vpc_id = "${aws_vpc.development_vpc.id}"
@@ -22,15 +21,11 @@ resource "aws_route_table" "dmz_rt" {
         Creator = "terraform"
     }
 }
-
-resource "aws_route" "route_2_vpn" {
-    route_table_id            = "${aws_route_table.dmz_rt.id}"
-    destination_cidr_block    = "10.8.0.0/24"
-#    instance_id               = "${var.vpn_instance_id}"
-    network_interface_id      = "${var.vpn_NIC_id}" 
-}
+    #count             = "${length(split(",", var.dmz_cidr))}"
 
 resource "aws_route_table_association" "dm_rt_2_igw" {
-    subnet_id      = "${aws_subnet.dmz_subnet.id}"
+    subnet_id      = "${element(split(",", var.dmz_subnet_id), count.index)}"
     route_table_id = "${aws_route_table.dmz_rt.id}"
+    count          =  "${length(split(",", var.dmz_cidr))}"
 }
+
