@@ -1,7 +1,7 @@
 /* ALB for the docker_app */
 resource "aws_alb" "docker_alb" {
   name               = "docker-alb-${var.environment}"
-  internal           = true
+  internal           = false
   security_groups    = ["${aws_security_group.ecs_sg.id}"]
   subnets            = ["${split(",", var.dmz_subnet_id)}"]
 
