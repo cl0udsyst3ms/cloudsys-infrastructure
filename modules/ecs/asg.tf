@@ -34,6 +34,7 @@ data "template_file" "docker_user_data" {
   vars {
     docker_cluster_name = "${aws_ecs_cluster.docker_cluster.name}"
     kong_password       = "${data.vault_generic_secret.postgres-pass.data["kong_password"]}"
+    kong_username       = "${data.vault_generic_secret.postgres-pass.data["kong_user"]}"
     environment         = "${var.environment}"
   }
 }

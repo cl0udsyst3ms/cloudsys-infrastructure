@@ -3,8 +3,9 @@
 echo "Setting cluster name"
 echo ECS_CLUSTER=${docker_cluster_name} >> /etc/ecs/ecs.config
 echo ECS_ENABLE_TASK_IAM_ROLE=true   >> /etc/ecs/ecs.config
-
-echo "{
+echo test
+cat <<EOT >> /etc/moja-liga/api/default.json 
+{
    "server": {
        "host": "localhost",
        "port": 9999
@@ -13,7 +14,7 @@ echo "{
        "type": "postgres",
        "port": 5432,
        "host": "db-3288347112.cmwuvjr8mnqq.eu-west-1.rds.amazonaws.com",
-       "user": "kong",
+       "user": "${kong_username}",
        "pass": "${kong_password}",
        "db": "moja_liga"
    },
@@ -22,4 +23,4 @@ echo "{
        "sync": { "force": true }
    }
 }
-" > /etc/moja-liga/api/default.json
+EOT

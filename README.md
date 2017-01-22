@@ -35,6 +35,8 @@ terraform apply -var-file=config/terraform.tfvars -input=false
 ```
 terraform plan -destroy -target=module.rds -var-file=config/terraform.tfvars
 # if you're happy with plan of destruction - execute:
-terraform apply -destroy -target=module.rds -var-file=config/terraform.tfvars
+terraform destroy -target=module.rds -var-file=config/terraform.tfvars
+# or whole infrastructure
+terraform destroy -var-file=config/terraform.tfvars
 ```
 
