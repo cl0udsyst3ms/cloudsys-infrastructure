@@ -13,7 +13,7 @@ resource "aws_security_group" "db_sg" {
       from_port   = 5432
       to_port     = 5432
       protocol    = "TCP"
-      cidr_blocks = ["7.7.6.0/23"]
+      cidr_blocks = ["1.0.0.0/24"]
    }
 
 

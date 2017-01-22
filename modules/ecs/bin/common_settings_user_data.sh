@@ -14,8 +14,8 @@ cat <<EOT >> /etc/moja-liga/api/default.json
        "type": "postgres",
        "port": 5432,
        "host": "db-3288347112.cmwuvjr8mnqq.eu-west-1.rds.amazonaws.com",
-       "user": "${kong_username}",
-       "pass": "${kong_password}",
+       "user": "${db_user}",
+       "pass": "${db_pass}",
        "db": "moja_liga"
    },
    "db_options": {
